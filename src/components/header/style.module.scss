@@ -1,0 +1,41 @@
+.promotions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+  }
+  
+  .carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    position: relative;
+  }
+  
+  .side-promotions {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+  
+  .promotion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  
+  .center-promotion {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  

@@ -1,0 +1,100 @@
+{
+    "food": [
+        {
+            "id":0,
+            "title": "Эклеры 4шт",
+            "price": "200",
+            "img": "https://sedelice.ru/uploads/blog/80/ekler.jpg",
+            "description": "Классический французский десерт",
+            "quantity": 10
+        },
+        {
+            "id":1,
+            "title": "Трайфл",
+            "price": "220",
+            "img": "https://news.store.rambler.ru/img/d80edfd452797ffa725b1a983ae89e00?img-format=auto&img-1-resize=height:400,fit:max&img-2-filter=sharpen",
+            "description": "Cлоистый десерт с кексом, кремом и фруктами.",
+            "quantity": 10
+        },
+        {
+            "id":2,
+            "title": "Фисташковый рулет",
+            "price": "250",
+            "img": "https://www.maggi.ru/data/images/recept/img640x500/recept_7283_ok0s.jpg",
+            "description":" нежный десерт с фисташковым вкусом, свернутый в форме рулета.",
+            "quantity": 10
+        },
+        {
+            "id":3,
+            "title": "Пирожное Павлова",
+            "price": "200",
+            "img": "https://tort-tort.ru/wp-content/uploads/2021/10/pirozhnoe-anni-pavlovoy-recept.jpg",
+            "description":"легкое пирожное с хрустящей коркой, мягким внутренним слоем и свежими ягодами.",
+            "quantity": 10
+        },
+        {
+            "id":4,
+            "title":"Премиум Тирамису Кара-Икра",
+            "price":"1119",
+            "img":"https://rchc.shop/upload/iblock/7b4/IMG_7674.jpg",
+            "description":"кофейный ганаш с печеньем савоярди, кофейной карамелью и дутым рисом",
+            "quantity": 10
+        },
+        {
+            "id":5,
+            "title":"Моти 'Малина'",
+            "price":"190",
+            "img":"https://thumb.tildacdn.com/tild6636-6462-4435-b534-376262356137/-/resize/440x/-/format/webp/IMG_0060__.jpg",
+            "description":" шоколад белый, пюре малины, сахар.",
+            "quantity": 10
+        },
+        {
+            "id":6,
+            "title":"Моти 'Черная смородина'",
+            "price":"190",
+            "img":"https://thumb.tildacdn.com/tild6233-3033-4863-b763-376438336335/-/format/webp/IMG_0068_1__.jpg",
+            "description":"шоколад белый, пюре чёрной смородины, сахар.",
+            "quantity": 10
+        },
+        {
+            "id":7,
+            "title":"Моти 'Пина колада'",
+            "price":"190",
+            "img":"https://thumb.tildacdn.com/tild3633-6531-4635-b365-303964653766/-/resize/440x/-/format/webp/IMG_0064_1__.jpg",
+            "description":"шоколад белый, пюре кокоса, сахар.",
+            "quantity": 10
+        },
+        {
+            "id":8,
+            "title":"дораяки с NUTELLA",
+            "price":"170",
+            "img":"https://www.honestfoodtalks.com/wp-content/uploads/2022/02/Dorayaki-recipe-red-bean.jpg",
+            "description":"Воздушные японские блинчики с Nutella",
+            "quantity": 10
+        },
+        {
+            "id":9,
+            "title":"Тарталетка с клубникой",
+            "price":"260",
+            "img":"https://zira.uz/wp-content/uploads/2017/06/tataletes-done-1300x919.jpeg",
+            "description":"Песочные тарталетки с шоколадным ганашем и клубникой",
+            "quantity": 10
+        },
+        {
+            "id":10,
+            "title":"Сырный торт с фруктами",
+            "price":"250",
+            "img":"https://st2.depositphotos.com/8557806/11413/i/450/depositphotos_114137686-stock-photo-cheese-cake-with-fruits.jpg",
+            "description":"Сырный торт с фруктами",
+            "quantity": 10
+        },
+        {
+            "id":11,
+            "title":"Фирменное мороженое",
+            "price":"300",
+            "img":"https://st2.depositphotos.com/4156511/11050/i/600/depositphotos_110504792-stock-photo-vanilla-and-chocolate-ice-cream.jpg",
+            "description":"Ванильное и шоколадное мороженое с органической клубникой",
+            "quantity": 10
+        }
+    ]
+}
