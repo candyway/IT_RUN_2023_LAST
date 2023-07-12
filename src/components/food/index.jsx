@@ -3,37 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFood } from '../../redux/food/foodSlice';
 import Spinner from '../spinner';
 import Fooditem from '../foodItem';
-
+import menu from '../../assets/icons/menu2.png';
+import background from '../../assets/images/background1.jpg';
 
 const Food = () => {
-    const dispatch = useDispatch();
-    const { food, isLoading } = useSelector(state => state.food);
+  const dispatch = useDispatch();
+  const { food, isLoading } = useSelector((state) => state.food);
 
-    useEffect(() => {
-        dispatch(getFood());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getFood());
+  }, [dispatch]);
 
-    if (isLoading) {
-        return <Spinner />;
-    }
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-    return (
-        <div className='flex flex-wrap gap-20 justify-between px-20 pt-20' style={
-            { backgroundImage: `url("https://oir.mobi/uploads/posts/2022-08/1661436489_48-oir-mobi-p-fon-konditerskie-izdeliya-instagram-52.jpg")` }
-        }>
-            {food &&
-                food.map(el => (
-                    <Fooditem
-                        key={el.id}
-                        title={el.title}
-                        img={el.img}
-                        price={el.price}
-                        id={el.id}
-                        desc={el.description}
-                    />
-                ))}
-        </div>
-    );
+
+  return (
+    <div className="bg-black w-11/12 mx-auto pt-10">
+      <img className="h-20 w-50 mx-auto" src={menu} alt="" />
+      <div className="flex flex-wrap gap-20 justify-between px-20 pt-20">
+        {food && Array.isArray(food) &&  food.map((el) => (
+            <Fooditem key={el.id} food={el} />
+          ))}
+      </div>
+    </div>
+  );
 };
 
 export default Food;

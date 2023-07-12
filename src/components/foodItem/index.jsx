@@ -1,49 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setItemInCart } from '../../redux/cart/cartSlice';
+import pen from '../../assets/icons/pen.png';
+import { getFood, updateFood } from '../../redux/food/foodSlice';
 
-const Fooditem = ({ title, img, price, id, desc }) => {
+const Fooditem = ({ food }) => {
+  const dispatch = useDispatch();
+
+  const [change, setChange] = useState(false)
+  const [title, setTitle] = useState(food.title)
+  const [price, setPrice] = useState(food.price)
+  const [description, setDescription] = useState(food.description)
+  const [originalData, setOriginalData] = useState(null)
+
+  const addInCart = () => {
+    dispatch(setItemInCart(food));
+  };
+
+  const handleEditClick = () => {
+    if (!change) {
+      setOriginalData({
+        title: title,
+        price: price,
+        description: description,
+      });
+    } else {
+      const updatedData = {
+        id: food.id,
+        updateData: {
+          title: title,
+          price: price,
+          description: description,
+        },
+      };
+      dispatch(updateFood(updatedData))
+        .then(() => {
+          dispatch(getFood());
+          setChange(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+    setChange(!change);
+  };
+  
+
+  const handleCancelClick = () => {
+    if (originalData) {
+      setTitle(originalData.title);
+      setPrice(originalData.price);
+      setDescription(originalData.description);
+    }
+    setChange(false);
+  };
+
   return (
-    
-      <div className="w-64 h-100 bg-white shadow rounded">
-        <Link to={`/item/${id}`}>
-        <div className="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
-          <div className="flex justify-between">
-          </div>
-          <div>
-            <span className="uppercase text-xs bg-green-50 p-0.5 border-green-500 border rounded text-green-700 font-medium select-none">
-              в наличии
-            </span>
-          </div>
-        </div>
-        </Link>
-        <div className="p-4 flex flex-col items-center">
-          <p className="text-gray-400 font-light text-xs text-center">{desc}</p>
-          <h1 className="text-gray-800 text-center mt-1">{title}</h1>
-          <p className="text-center text-gray-800 mt-1">{price}</p>
-          <div className="inline-flex items-center mt-2">
-            <button className="bg-white rounded-l border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-              </svg>
-            </button>
-            <div className="bg-gray-100 border-t border-b border-gray-100 text-gray-600 hover:bg-gray-100 inline-flex items-center px-4 py-1 select-none">
-              2
+    <div className="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+      <Link to={`/item/${food.id}`}>
+        <img
+          src={food.img}
+          alt={food.title}
+          className="h-48 w-48 rounded-lg shadow-md object-cover"
+        />
+      </Link>
+      <div className="w-40 md:w-48 bg-white -mt-6 shadow-lg rounded-lg overflow-hidden">
+        {change ? (
+          <div className="py-2 px-4">
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="mb-1 h-5 w-full border border-gray-300 rounded-lg px-2 py-1 text-sm"
+            />
+            <input
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="mb-1 h-5 w-full border border-gray-300 rounded-lg px-2 py-1 text-sm"
+            />
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="mb-1 h-5 w-full border border-gray-300 rounded-lg px-2 py-1 text-sm"
+            />
+            <div className="flex justify-between mt-2">
+              <button onClick={handleEditClick}>Save</button>
+              <button onClick={handleCancelClick}>Cancel</button>
             </div>
-            <button className="bg-white rounded-r border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-            </button>
           </div>
-          <button className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 mt-4 w-full flex items-center justify-center">
-            Add to order
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </button>
-        </div>
+        ) : (
+          <div>
+            <div className="py-1 text-center font-bold uppercase tracking-wide text-gray-800 text-xs">
+              {food.title}
+            </div>
+            <div className="flex items-center justify-between py-1 px-2 bg-gray-400">
+              <h1 className="text-gray-800 font-bold text-xs">{food.price} KGS</h1>
+              <button
+                onClick={() => addInCart()}
+                className="bg-black text-[#FFD700] font-semibold py-1 px-3 border border-[#C4C4C4] rounded transition-colors duration-300 hover:bg-[#FFD700] hover:text-black hover:border-transparent text-xs"
+              >
+                Купить
+              </button>
+              <button
+                className="bg-[#FFD700] text-[#FFD700] font-semibold py-1 px-3 border border-[#C4C4C4] rounded transition-colors duration-300 hover:bg-gray-700 hover:border-transparent"
+                onClick={handleEditClick}
+              >
+                <img className="w-4 h-4" src={pen} alt="" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-    
+    </div>
   );
 };
 

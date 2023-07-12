@@ -6,7 +6,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold text-center mb-6">О нас</h1>
 
-        <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex items-center gap-10">
           <div className="md:w-1/2">
             <img
               src="https://inspiregroup.pro/wp-content/uploads/2016/11/Biskvit-vid-2.jpg"
