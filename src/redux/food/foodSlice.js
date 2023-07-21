@@ -25,7 +25,16 @@ export const updateFood = createAsyncThunk('UPDATE_FOOD',async (foodData, thunkA
         return thunkApi.rejectWithValue(error.response.data);
       }
     }
-  );
+  )
+
+  export const deleteFood = createAsyncThunk('DELETE_FOOD',async(foodData,thunkApi) => {
+    try {
+        await foodService.deleteFood(foodData.id,foodData.updateData)
+        return foodData.updateData;
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data)
+    }
+  } )
 
 export const foodSlice = createSlice({
     name: 'food',
@@ -69,6 +78,19 @@ export const foodSlice = createSlice({
                 state.food = action.payload
             })
             .addCase(updateFood.rejected,(state,action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload.message
+                state.food = null
+            })
+            .addCase(deleteFood.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deleteFood.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.food = state.food.filter(food => food.id !== action.payload)
+            })
+            .addCase(deleteFood.rejected,(state,action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload.message

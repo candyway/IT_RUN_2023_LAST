@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setItemInCart } from '../../redux/cart/cartSlice';
 import pen from '../../assets/icons/pen.png';
-import { getFood, updateFood } from '../../redux/food/foodSlice';
+import { deleteFood, getFood, updateFood } from '../../redux/food/foodSlice';
+import { toast } from 'react-toastify';
 
-const Fooditem = ({ food }) => {
+const Fooditem = ({ food ,modal, cartModal}) => {
   const dispatch = useDispatch();
 
   const [change, setChange] = useState(false)
@@ -14,8 +15,15 @@ const Fooditem = ({ food }) => {
   const [description, setDescription] = useState(food.description)
   const [originalData, setOriginalData] = useState(null)
 
+  const {user} = useSelector(state => state.user)
+
   const addInCart = () => {
     dispatch(setItemInCart(food));
+
+    toast.success(`Добавлено в корзину: ${food.title}`, {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
   const handleEditClick = () => {
@@ -35,9 +43,10 @@ const Fooditem = ({ food }) => {
         },
       };
       dispatch(updateFood(updatedData))
-        .then(() => {
+        .then(res => {
           dispatch(getFood());
           setChange(false);
+          console.log(res.data)
         })
         .catch((error) => {
           console.log(error);
@@ -46,6 +55,9 @@ const Fooditem = ({ food }) => {
     setChange(!change);
   };
   
+  const deleteProduct = (id) => {
+    dispatch(deleteFood(id))
+  }
 
   const handleCancelClick = () => {
     if (originalData) {
@@ -56,8 +68,20 @@ const Fooditem = ({ food }) => {
     setChange(false);
   };
 
+
   return (
-    <div className="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+    <div 
+    style={{zIndex: cartModal || modal ? '-2' : '1'}}
+    className="flex flex-col justify-center items-center max-w-sm mx-auto my-8 relative">
+       {
+        user.email == 'admin@gmail.com' ? <button
+        onClick={() => deleteProduct(food.id)}
+        className="bg-black text-[#FFD700] font-semibold w-7 h-7 border border-[#C4C4C4] rounded-full transition-colors duration-300 hover:bg-[#FFD700] hover:text-black hover:border-transparent text-xs absolute top-2 left-2"
+      >
+        x
+      </button>
+       : <div></div>
+       }
       <Link to={`/item/${food.id}`}>
         <img
           src={food.img}
@@ -67,7 +91,7 @@ const Fooditem = ({ food }) => {
       </Link>
       <div className="w-40 md:w-48 bg-white -mt-6 shadow-lg rounded-lg overflow-hidden">
         {change ? (
-          <div className="py-2 px-4">
+          <div className="py-2 px-4 bg-gray-700">
             <input
               type="text"
               value={title}
@@ -87,8 +111,8 @@ const Fooditem = ({ food }) => {
               className="mb-1 h-5 w-full border border-gray-300 rounded-lg px-2 py-1 text-sm"
             />
             <div className="flex justify-between mt-2">
-              <button onClick={handleEditClick}>Save</button>
-              <button onClick={handleCancelClick}>Cancel</button>
+              <button className="bg-black text-[#FFD700] font-semibold py-1 px-3 border border-[#C4C4C4] rounded-xl transition-colors duration-300 hover:bg-[#FFD700] hover:text-black hover:border-transparent text-xs" onClick={handleEditClick}>Save</button>
+              <button className="bg-black text-[#FFD700] font-semibold py-1 px-3 border border-[#C4C4C4] rounded-xl transition-colors duration-300 hover:bg-[#FFD700] hover:text-black hover:border-transparent text-xs" onClick={handleCancelClick}>Cancel</button>
             </div>
           </div>
         ) : (
@@ -96,7 +120,8 @@ const Fooditem = ({ food }) => {
             <div className="py-1 text-center font-bold uppercase tracking-wide text-gray-800 text-xs">
               {food.title}
             </div>
-            <div className="flex items-center justify-between py-1 px-2 bg-gray-400">
+            {
+              user.email == 'admin@gmail.com' ? <div className="flex items-center justify-between py-1 px-2 bg-gray-400">
               <h1 className="text-gray-800 font-bold text-xs">{food.price} KGS</h1>
               <button
                 onClick={() => addInCart()}
@@ -110,7 +135,17 @@ const Fooditem = ({ food }) => {
               >
                 <img className="w-4 h-4" src={pen} alt="" />
               </button>
-            </div>
+            </div> : 
+            <div className="flex items-center justify-between py-1 px-2 bg-gray-400">
+            <h1 className="text-gray-800 font-bold text-xs">{food.price} KGS</h1>
+            <button
+              onClick={() => addInCart()}
+              className="bg-black text-[#FFD700] font-semibold py-1 px-3 border border-[#C4C4C4] rounded transition-colors duration-300 hover:bg-[#FFD700] hover:text-black hover:border-transparent text-xs"
+            >
+              Купить
+            </button>
+          </div>
+            }
           </div>
         )}
       </div>

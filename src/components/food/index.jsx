@@ -4,9 +4,8 @@ import { getFood } from '../../redux/food/foodSlice';
 import Spinner from '../spinner';
 import Fooditem from '../foodItem';
 import menu from '../../assets/icons/menu2.png';
-import background from '../../assets/images/background1.jpg';
 
-const Food = () => {
+const Food = ({modal, cartModal}) => {
   const dispatch = useDispatch();
   const { food, isLoading } = useSelector((state) => state.food);
 
@@ -19,12 +18,13 @@ const Food = () => {
   }
 
 
+
   return (
     <div className="bg-black w-11/12 mx-auto pt-10">
       <img className="h-20 w-50 mx-auto" src={menu} alt="" />
       <div className="flex flex-wrap gap-20 justify-between px-20 pt-20">
         {food && Array.isArray(food) &&  food.map((el) => (
-            <Fooditem key={el.id} food={el} />
+            <Fooditem modal={modal} cartModal={cartModal} key={el.id} food={el} />
           ))}
       </div>
     </div>

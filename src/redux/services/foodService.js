@@ -17,8 +17,13 @@ const updateFood = async (id,updateData) => {
     return food.data
 }
 
+const deleteFood = async (id) => {
+    const res = await axios.delete(`http://localhost:800/food/${id}`)
+    return res.data
+}
+
 const foodService = {
-    getFood,createFood,updateFood
+    getFood,createFood,updateFood,deleteFood
 }
 
 export default foodService

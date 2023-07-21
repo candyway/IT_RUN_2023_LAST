@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import stock from "../../assets/images/stock.jpg";
-import menu from "../../assets/icons/cart1.png";
-import cart1 from "../../assets/icons/Menu.png";
+import stock from "../../assets/images/stock1.jpg";
+import menu from "../../assets/images/stock2.png";
+import cart1 from "../../assets/images/stock3.jpg";
 
 const Stock = ({ modal, setModal, setCartModal, cartModal }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

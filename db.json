@@ -83,7 +83,7 @@
     {
       "id": 10,
       "title": "Сырный торт с фруктами",
-      "price": "250",
+      "price": "25077",
       "img": "https://st2.depositphotos.com/8557806/11413/i/450/depositphotos_114137686-stock-photo-cheese-cake-with-fruits.jpg",
       "description": "Сырный торт с фруктами",
       "quantity": 1
@@ -95,6 +95,33 @@
       "img": "https://st2.depositphotos.com/4156511/11050/i/600/depositphotos_110504792-stock-photo-vanilla-and-chocolate-ice-cream.jpg",
       "description": "Ванильное и шоколадное мороженое с органической клубникой",
       "quantity": 1
+    }
+  ],
+  "users": [
+    {
+      "email": "samkadykeev23@gmail.com",
+      "password": "$2a$10$ngLD4/2qt0sqhemWiQxJ1uG6NPrgO6R4HG36/faFn9v/YphEIpjHu",
+      "id": 1
+    },
+    {
+      "email": "rakamakaf1231on23@gmail.com",
+      "password": "$2a$10$HeWMQLDj2FVHTcG62aqdq.3EIkULhmc/UUc6QJv/4QbzQREWB3QUS",
+      "id": 2
+    },
+    {
+      "email": "rakamakaf12312on23@gmail.com",
+      "password": "$2a$10$oB.Gr/6kkffj4zle34IyA.jXJZzkthIoxuqPUAxVnrrzSr/PkuVe.",
+      "id": 3
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$Arh6pqTvIxx1ar/94yvS0eueWMe3BKIcOsMebHqxDd1FhqoDF65Me",
+      "id": 4
+    },
+    {
+      "email": "bakai@gmail.com",
+      "password": "$2a$10$nKU0JFDnPpC5eiVp7x6R.eceVBF.HYXX702BKhAPms3kqFgb.U9wO",
+      "id": 5
     }
   ]
 }

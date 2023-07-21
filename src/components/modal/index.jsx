@@ -37,18 +37,21 @@ const Modal = ({ modal, setModal }) => {
     >
       <div
         style={{
-          width: "400px",
+          width: "600px",
           margin: "0px auto",
           border: "solid 1px black",
           padding: "30px",
           borderRadius: "10px",
           position: "fixed",
-          top: "1%",
-          right: "33%",
+          top: "10%",
+          right: "23%",
           background: "white",
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '20px'
         }}
       >
-        <button onClick={() => setModal(false)}>close</button>
+        <button className="bg-black text-[#FFD700] font-semibold w-7 h-7 border border-[#C4C4C4] rounded-full transition-colors duration-300 hover:bg-[#FFD700] hover:text-black hover:border-transparent text-xs" onClick={() => setModal(false)}>x</button>
         <h4
           class="text-xl font-bold text-navy-700 dark:text-white mb-3"
           style={{ width: "50%", margin: "15px auto" }}
@@ -115,7 +118,7 @@ const Modal = ({ modal, setModal }) => {
               create();
               setModal(false);
             }}
-            class="hover:shadow-form w-full rounded-md bg-black text-[#FFD700] hover:bg-[#FFD700] transition-colors duration-300 hover:text-black py-3 px-8 text-center text-base font-semibold text-white outline-none"
+            class="hover:shadow-form w-full rounded-md bg-black text-[#FFD700] hover:bg-[#FFD700] transition-colors duration-300 hover:text-black py-3 px-8 text-center text-base font-semibold outline-none"
           >
             Добавить
           </button>
